@@ -44,7 +44,7 @@ async function updatePrices() {
                                         upsert: true
                                     })
                                 .then(function (doc) {
-                                    console.log(`${d}: ${doc.price}, ${doc.marketCap} updated`);
+                                    // console.log(`${d}: ${doc.price}, ${doc.marketCap} updated`);
                                 })
                                 .catch(function (error) {
                                     console.error(error);
@@ -67,7 +67,7 @@ async function updateTotalSupplys() {
         try {
             let url = `https://api.tzkt.io/v1/statistics?offset=${offset}&limit=10000`;
             const response = await axios.get(url);
-            console.log(url);
+            // console.log(url);
             offset = response.data[response.data.length - 1].level + 1;  // update for next iteration
             for (let i = 0; i < response.data.length; i++) {
                 const element = response.data[i];
@@ -100,7 +100,7 @@ async function updateTotalSupplys() {
                         upsert: true
                     })
                     .then((doc) => {
-                        console.log(`totalSupply on date ${doc.dateString} updated in database`);
+                        // console.log(`totalSupply on date ${doc.dateString} updated in database`);
                     }).catch((err) => {
                         console.error(err);
                     })
@@ -119,7 +119,7 @@ async function updateCycles() {
         try {
             let url = `https://api.tzkt.io/v1/statistics/cyclic?offset=${offset}&limit=10000`;
             const response = await axios.get(url);
-            console.log(url);
+            // console.log(url);
             offset = response.data[response.data.length - 1].level + 1;  // update for next iteration
             for (let i = 0; i < response.data.length; i++) {
                 const element = response.data[i];
@@ -175,7 +175,7 @@ async function updateCycles() {
                 upsert: true
             })
             .then((doc) => {
-                console.log(`cycleNumber on date ${doc.dateString} updated in database`);
+                // console.log(`cycleNumber on date ${doc.dateString} updated in database`);
             }).catch((err) => {
                 console.error(err);
             });
