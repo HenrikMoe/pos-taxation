@@ -9,7 +9,13 @@ class Database {
     }
 
     _connect() {
-        mongoose.connect(`mongodb://${server}/${database}`)
+        mongoose.connect(`mongodb://${server}/${database}`, 
+        { 
+            useFindAndModify: false,
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true 
+        })
             .then(() => {
                 console.log('Database connection successful');
             })

@@ -47,10 +47,11 @@ Set the environment variable for the production mode.
 
 > NODE_ENV=production
 
-Start the server service using `forever`.
+Install CLI tool "forever" for ensuring that the program runs continuously. Then, start the server service using `forever`.
 
-> forever start app.js -a
+> npm install forever -g
+> forever start --minUptime 1000 --spinSleepTime 1000 app.js -a
 
-Suppose you see “info: Forever processes running” congratulations! You start the server service successfully!
+Suppose you see “info: Forever processes running” congratulations! You start the server service successfully! You can check the program running status and log file path using command `forever list` anytime.
 
-Note: If you find there are all null values in the returned data, don’t worry. That’s because the server has not synced enough data with your local MongoDB yet. The service will sync data periodically. It usually takes at most 90 minutes. If you cannot wait that long, you can manually run `node db_init.js` to update the local database.
+Note: If you find there are all null values in the returned data, don’t worry. That’s because the server has not synced enough data with your local MongoDB yet. The service will sync data periodically. It usually takes at most 90 minutes. If you cannot wait that long, you can manually run `node db_init.js` to update the local database. The `db_init.js` will output "The database is fully synchronized." in your console once the initial sync has finished.

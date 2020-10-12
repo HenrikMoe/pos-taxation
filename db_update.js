@@ -44,7 +44,7 @@ async function updatePrices() {
                                         upsert: true
                                     })
                                 .then(function (doc) {
-                                    // console.log(`${d}: ${doc.price}, ${doc.marketCap} updated`);
+                                    console.log(`${d}: ${doc.price}, ${doc.marketCap} updated`);
                                 })
                                 .catch(function (error) {
                                     console.error(error);
@@ -100,7 +100,7 @@ async function updateTotalSupplys() {
                         upsert: true
                     })
                     .then((doc) => {
-                        // console.log(`totalSupply on date ${doc.dateString} updated in database`);
+                        console.log(`totalSupply on date ${doc.dateString} updated in database`);
                     }).catch((err) => {
                         console.error(err);
                     })
@@ -175,7 +175,7 @@ async function updateCycles() {
                 upsert: true
             })
             .then((doc) => {
-                // console.log(`cycleNumber on date ${doc.dateString} updated in database`);
+                console.log(`cycleNumber on date ${doc.dateString} updated in database`);
             }).catch((err) => {
                 console.error(err);
             });
