@@ -50,6 +50,7 @@ Set the environment variable for the production mode.
 Install CLI tool "forever" for ensuring that the program runs continuously. Then, start the server service using `forever`.
 
 > npm install forever -g
+
 > forever start --minUptime 1000 --spinSleepTime 1000 app.js -a
 
 Suppose you see “info: Forever processes running” congratulations! You start the server service successfully! You can check the program running status and log file path using command `forever list` anytime.
