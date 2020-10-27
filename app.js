@@ -4,7 +4,7 @@ const cron = require('node-cron');
 const compression = require('compression');
 const helmet = require('helmet');
 
-const {updatePrices, updateTotalSupplys, updateCycles} = require('./db_update');
+const { updatePrices, updateTotalSupplys, updateCycles } = require('./db_update');
 
 cron.schedule('0 * * * *', () => {
     updatePrices();
@@ -27,4 +27,16 @@ app.use('/downloads', downloadsRouter);
 const apiRouter = require('./routes/api.js');
 app.use('/api', apiRouter);
 
-app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
+const server = app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
+
+const options = { origins: '*:*' };
+const io = require('socket.io')(server, options);
+
+const {analysis} = require('./sio/analysis');
+io.on('connection', (socket) => {
+    console.log('someone connected');
+    socket.on('analysisReq', data => {
+        analysis(socket, data.address, data.start, data.end);
+    });
+});
+
