@@ -34,7 +34,6 @@ const io = require('socket.io')(server, options);
 
 const {analysis} = require('./sio/analysis');
 io.on('connection', (socket) => {
-    console.log('someone connected');
     socket.on('analysisReq', data => {
         analysis(socket, data.address, data.start, data.end);
     });
