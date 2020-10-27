@@ -13,7 +13,6 @@ async function getRewards(address) {
             let url = `https://api.tzkt.io/v1/accounts/${address}/operations?type=endorsement,baking,nonce_revelation,double_baking,double_endorsing,transaction,origination,delegation,reveal,revelation_penalty&lastId=${lastId}&limit=1000&sort=0`;
             // let url = `https://api.tzkt.io/v1/accounts/${address}/operations?lastId=${lastId}&limit=1000&sort=0`;
             const response = await axios.get(url);
-            // console.log(url);
             lastId = response.data[response.data.length - 1].id;  // update lastId
             for (let i = 0; i < response.data.length; i++) {
                 const element = response.data[i];
@@ -157,7 +156,6 @@ async function getBalances(address) {
         try {
             let url = `https://api.tzkt.io/v1/accounts/${address}/balance_history?offset=${offset}&limit=10000`;
             const response = await axios.get(url);
-            // console.log(url);
             offset += response.data.length  // update lastId
             for (let i = 0; i < response.data.length; i++) {
                 const element = response.data[i];
@@ -197,16 +195,11 @@ async function analysis(socket, address, start, end) {
 
             let balances = await getBalances(address);
             if (balances.length === 0) {
-                // res.status(400).json({ error: 'The address does not has balance history.' });
                 socket.emit('analysisResErr', { error: 'The address does not has balance history.' });
                 return;
             }
             let firstBalanceD = Number(Object.keys(balances)[0]);
             if (startDateD < firstBalanceD) {
-                // res.status(400).json({
-                //     error: 'The start date is earilier than the first balance day.',
-                //     firstBalanceDay: new Date(firstBalanceD * 1000 * 60 * 60 * 24).toISOString().substring(0, 10)
-                // });
                 socket.emit('analysisResErr', {
                     error: 'The start date is earilier than the first balance day.',
                     firstBalanceDay: new Date(firstBalanceD * 1000 * 60 * 60 * 24).toISOString().substring(0, 10)
@@ -331,25 +324,20 @@ async function analysis(socket, address, start, end) {
                 }
                 analysisResults.push(element);
             }
-            // res.json(analysisResults);
             socket.emit('analysisRes', analysisResults);
         } catch (error) {
             if (error.repsonse && error.response.data && error.response.data.code && error.response.data.errors) {
-                // res.status(error.response.data.code).json(error.response.data.errors);
                 socket.emit('analysisResErr', {
                     error: error.response.data.errors
                 });
             }
             else {
-                // console.error(error);
-                // res.status(400).json({ error: 'please check input params' });
                 socket.emit('analysisResErr', {
                     error: 'please check input params'
                 });
             }
         }
     } else {
-        // res.status(400).json({ error: 'please check input params' });
         socket.emit('analysisResErr', {
             error: 'please check input params'
         });
