@@ -56,3 +56,18 @@ Install CLI tool "forever" for ensuring that the program runs continuously. Then
 Suppose you see “info: Forever processes running” congratulations! You start the server service successfully! You can check the program running status and log file path using command `forever list` anytime.
 
 Note: If you find there are all null values in the returned data, don’t worry. That’s because the server has not synced enough data with your local MongoDB yet. The service will sync data periodically. It usually takes at most 90 minutes. If you cannot wait that long, you can manually run `node db_init.js` to update the local database. The `db_init.js` will output "The database is fully synchronized." in your console once the initial sync has finished.
+
+### Interfacing
+
+Note: If you want to interface with your local server you must manually initalize the websocket in the interface directory. To do this navigate to interface/js/socket.js. On line 8 of the file replace,
+
+> const socket = io('https://postaxation.com:3000');
+
+with your local server url. 
+
+The following instructions will guide you how to locally interface with any web socket configuration. 
+
+After downloading the interface module, open index.html on your web browser. 
+
+Interface.
+
