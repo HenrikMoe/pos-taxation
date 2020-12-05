@@ -25,7 +25,7 @@ To deploy the server, you need to have at least the following things.
 > npm install express
 - MongoDB
 > npm install mongodb
-- Server (no matter it is Heroku or AWS EC2)
+- Server (no matter if it is Heroku, AWS EC2, or Local)
 > ssh
 
 ### Steps
