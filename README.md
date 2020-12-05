@@ -20,8 +20,8 @@ Our solution is PoS Taxation ©, a web tool where users enter their staking addr
 ## Deployment
 
 ### Requirements
-To deploy the website, you need to have at least the following things.
-- Express.js
+To deploy the server, you need to have at least the following things.
+- Node.js
 - MongoDB
 - Server (no matter it is Heroku or AWS EC2)
 
