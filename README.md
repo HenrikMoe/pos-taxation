@@ -68,8 +68,4 @@ First, complete the server deployment process above.
 
 Then, after downloading the interface module, open index.html on your web browser. 
 
-The websocket will be initted with your local server. 
-
->io('http://localhost:3000')
-
-and you will be interfacing
+The websocket will be initted with your local server and you will be interfacing
