@@ -5,7 +5,7 @@ $(function(){
 var click = document.getElementById('button');
 
 //init websocket
-const socket = io('https://postaxation.com:3000');
+const socket = io('https://localhost:3000');
 
 //connect the socket get the socket id in console
 socket.on('connect', () => {
