@@ -69,5 +69,3 @@ The following instructions will guide you how to locally interface with any web 
 
 After downloading the interface module, open index.html on your web browser. 
 
-Interface.
-
