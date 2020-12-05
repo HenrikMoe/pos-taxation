@@ -59,13 +59,14 @@ Note: If you find there are all null values in the returned data, don’t worry.
 
 ### Interfacing
 
-Note: If you want to interface with your local server you must manually initalize the websocket in the interface directory. To do this navigate to interface/js/socket.js. On line 8 of the file replace,
+The following instructions will guide you how to locally interface with your locally deployed server. 
 
-> const socket = io('https://postaxation.com:3000');
+First, complete the server deployment process above.
 
-with your local server url. 
+Then, after downloading the interface module, open index.html on your web browser. 
 
-The following instructions will guide you how to locally interface with any web socket configuration. 
+The websocket will be initted with your local server. 
 
-After downloading the interface module, open index.html on your web browser. 
+>io('http://localhost:3000')
 
+and you will be interfacing
