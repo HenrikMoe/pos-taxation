@@ -21,9 +21,12 @@ Our solution is PoS Taxation ©, a web tool where users enter their staking addr
 
 ### Requirements
 To deploy the server, you need to have at least the following things.
-- Node.js
+- Express js 
+> npm install express
 - MongoDB
+> npm install mongodb
 - Server (no matter it is Heroku or AWS EC2)
+> ssh
 
 ### Steps
 The following instructions will guide you through deploying the backend code onto an AWS EC2 server (Ubuntu 18.04).
