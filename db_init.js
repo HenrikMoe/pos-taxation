@@ -1,3 +1,4 @@
+//db framework activation through update module 
 const {updatePrices, updateTotalSupplys, updateCycles} = require('./db_update');
 
 console.log(`Database sync starts.`)

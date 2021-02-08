@@ -14,7 +14,6 @@ async function getRewards(address) {
             // let url = `https://api.tzkt.io/v1/accounts/${address}/operations?lastId=${lastId}&limit=1000&sort=0`;
             const response = await axios.get(url);
             lastId = response.data[response.data.length - 1].id;  // update lastId
-            //iterate through response and append whats needed
             for (let i = 0; i < response.data.length; i++) {
                 const element = response.data[i];
                 if ('endorsement' === element.type) {
@@ -170,7 +169,6 @@ async function getBalances(address) {
             console.error(error);
         }
     }
-    //modify the dictionary balance object with dates as keys
     if (Object.keys(balances).length > 0) {
         const startD = Math.min(Object.keys(balances).map(Number)[0]);
         const todayD = Math.floor(new Date().getTime() / (1000 * 60 * 60 * 24));

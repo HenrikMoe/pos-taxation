@@ -9,7 +9,7 @@ const compression = require('compression');
 //secondary heading on http reqs 
 const helmet = require('helmet');
 
-//system objects 
+//database update objects 
 const { updatePrices, updateTotalSupplys, updateCycles } = require('./db_update');
 
 //execute code by min,hour,day,month,year
@@ -19,6 +19,9 @@ cron.schedule('0 * * * *', () => {
     updateTotalSupplys();
     updateCycles();
 });
+
+//above is database working
+//below is request routing and analysis framework
 
 //initizalize the express framework
 const app = express();

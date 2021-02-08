@@ -1,25 +1,32 @@
+//db update
+
+//get database framework from database.js
 let db = require('./database.js');
+//get db element frameworks
 let BlockchainModel = require('./models/blockchain');
 let StatisticModel = require('./models/statistic');
 let CycleModel = require('./models/cycle');
+// json xml request repsonse module: framework foundation buffing, effects in req res syntax 
 let axios = require('axios');
+//request rate limiter
 let Bottleneck = require('bottleneck');
+//a second cycle db element framework - a const
 const cycle = require('./models/cycle');
 
 
 async function updatePrices() {
-    // update price data in db (full sync)
+    // update price data in db (full sync) // create emission from framework
     BlockchainModel
         .findOne({}).sort({ date: 'desc' }).exec()
         .then(doc => {
             let updateFromDate = new Date(Date.UTC(2018, 5, 30));
             const updateToDate = new Date(new Date().getTime() - 1000 * 60 * 60 * 24);  // get yesterday
-            const promises = [];
             const limiter = new Bottleneck({
                 maxConcurrent: 1,
                 minTime: 1000
             });
             const days = Math.floor((updateToDate.getTime() - updateFromDate.getTime()) / (1000 * 60 * 60 * 24));
+            //prepare dates for coingecko query
             for (let i = 0; i <= days; i++) {
                 const d = new Date(updateFromDate.getTime() + i * 1000 * 60 * 60 * 24);
                 const fetchData = async () => {
@@ -27,9 +34,11 @@ async function updatePrices() {
                 };
                 limiter.schedule(fetchData)
                     .then(function (response) {
+                        //specific coingecko dictionary format 
                         if (response.data.market_data) {
                             const price = response.data.market_data.current_price.usd;
                             const marketCap = response.data.market_data.market_cap.usd;
+                            //add query results to db
                             BlockchainModel
                                 .findOneAndUpdate(
                                     {
@@ -83,6 +92,7 @@ async function updateTotalSupplys() {
     let lastDateNumber = 0;
     let lastTotalSupply = 0;
     let lastDateString = '';
+    //updates the supply framework by iterating through the suppply query and updating the whole element section of the db
     for (let i = 0; i < statistics.length; i++) {
         const dateNumber = Math.floor(new Date(Date.parse(statistics[i].timestamp)).getTime() / (1000 * 60 * 60 * 24));
         if (dateNumber > lastDateNumber) {
