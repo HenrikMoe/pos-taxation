@@ -46,6 +46,10 @@ Remember to start your local MongoDB before you run the project.
 
 > sudo systemctl start mongod
 
+On mac
+
+> sudo launchctl start mongod
+
 Set the environment variable for the production mode.
 
 > NODE_ENV=production
